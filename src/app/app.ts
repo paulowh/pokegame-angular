@@ -1,12 +1,33 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, signal, computed, effect } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('myapp');
+  // Defina os estados iniciais aqui (ex: money = signal(50))
+  money = signal(50);
+  energy = signal(100);
+  
+  // Crie um computed signal para saber se está cansado ou vida cheia
+  isTired = computed(() => this.energy() < 10);
+  isFullLife = computed(() => this.energy() === 100);
+
+  // Use um effect para logar no console quando o dinheiro mudar
+  logEffect = effect(() => {
+    console.log('Dinheiro atual:', this.money());
+  });
+  
+  battle() {
+    // TODO: Só batalha se tiver energia. Custa 10 de energia, ganha 20 money.
+    this.energy.update(value => value - 10);
+    this.money.update(value => value + 20);
+  }
+
+  heal() {
+    // TODO: Recupera energia para 100.
+    this.energy.set(100);
+  }
 }
