@@ -1,8 +1,11 @@
 import { Component, signal, computed, effect } from '@angular/core';
+import { Header } from "./components/header/header";
+import { Gym } from './components/gym/gym';
+import { Center } from "./components/center/center";
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [Header, Center, Gym],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

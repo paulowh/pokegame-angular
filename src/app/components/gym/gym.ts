@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './gym.css',
 })
 export class Gym {
+  // Recebe energia do pai (obrigatório)
+  energy = input.required<number>();
+  // Cria um evento para avisar o pai
+  battleRequest = output<void>();
 
+  isTired = computed(() => this.energy() < 10);
 }
+
